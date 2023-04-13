@@ -1,0 +1,26 @@
+{
+    "data": [
+      {
+        "number": 1,
+        "labels": [
+          {
+            "name": "label1"
+          },
+          {
+            "name": "label2"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "labels": [
+          {
+            "name": "label1"
+          },
+          {
+            "name": "label2"
+          }
+        ]
+      }
+    ]
+  }
