@@ -2,6 +2,10 @@
 
 This is a simple serverless function built with Next.js that uses the GitHub REST API to retrieve issues and posts them to a Slack channel using the Slack Web API.
 
+## Prerequisites
+
+Create a slackbot in your slack workspace.
+
 ## Configuration
 
 The function expects the following environment variables to be set:
@@ -33,4 +37,3 @@ The function is deployed on Vercel using the following steps:
 ## Usage
 
 To use the function, simply run the function URL `/api/handler` in your browser, use a tool like `curl` to make a GET request to the URL or trigger the cron job in the Vercel dashboard. The function will retrieve the latest issue updates and post them to Slack.
-
