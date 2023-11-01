@@ -4,19 +4,13 @@ import { extractUrl } from "./utils/issues.util";
 import { WebClient } from "@slack/web-api";
 import * as cheerio from "cheerio";
 import fetch from "node-fetch"; // Use node-fetch instead of request-promise
-
-// Store environment variables
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const SLACK_TOKEN = process.env.SLACK_TOKEN;
-const GITHUB_REPO_OWNER = process.env.GITHUB_REPO_OWNER;
-const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME;
-const SLACK_CHANNEL = process.env.SLACK_CHANNEL || "default-channel";
+import { Configs } from "./constants/configs";
 
 const octokit = new Octokit({
-  auth: GITHUB_TOKEN,
+  auth: Configs.GITHUB_TOKEN,
 });
 
-const web = new WebClient(SLACK_TOKEN);
+const web = new WebClient(Configs.SLACK_TOKEN);
 
 async function getUserName(userId: string) {
   try {
@@ -73,8 +67,8 @@ export default async function handler(
     const ogDescription = await getOgDescription(url);
 
     const githubResponse = await octokit.issues.create({
-      owner: `${GITHUB_REPO_OWNER}`,
-      repo: `${GITHUB_REPO_NAME}`,
+      owner: `${Configs.GITHUB_REPO_OWNER}`,
+      repo: `${Configs.GITHUB_REPO_NAME}`,
       title: `Issue created by ${userName}`,
       labels: ["slack-published"],
       body: `${url}\n${ogDescription}`,
@@ -84,7 +78,7 @@ export default async function handler(
       const message = `<@${user_id}> went on the internet the other day and found this: ${url}`;
 
       await web.chat.postMessage({
-        channel: SLACK_CHANNEL,
+        channel: Configs.SLACK_CHANNEL,
         text: message,
       });
 
